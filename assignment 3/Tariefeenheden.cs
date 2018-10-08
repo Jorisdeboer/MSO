@@ -2,8 +2,10 @@
 
 namespace Lab3
 {
-	public static class Tariefeenheden
-	{
+    public static class Tariefeenheden
+    {
+        public static int[,] Stations;
+
 		public static String[] getStations()
 		{
 			return new String[] {
@@ -14,86 +16,47 @@ namespace Lab3
 				"Duivendrecht",
 				"Weesp"
 			};
-		}
+        }
+
+        public static void Tabel()
+        {
+            Stations = new int[getStations().Length, getStations().Length];
+            
+            for(int i = 0; i < getStations().Length; i++)
+            {
+                Stations[i, i] = 0;
+            }
+
+            //Utrecht Centraal
+            Stations[0, 1] = 32; Stations[0, 2] = 26; Stations[0, 3] = 18; Stations[0, 4] = 31; Stations[0, 5] = 33;
+            //Gouda
+            Stations[1, 2] = 58; Stations[1, 3] = 50; Stations[1, 4] = 54; Stations[1, 5] = 57;
+            //Geldermalsen
+            Stations[2, 3] = 44; Stations[2, 4] = 57; Stations[2, 5] = 59;
+            //Hilversum
+            Stations[3, 4] = 18; Stations[3, 5] = 15;
+            //Duivendrecht
+            Stations[4, 5] = 3;
+            //Weesp
+            //Heeft nog niks.
+
+            //voor het vullen van de andere helft van de tabel.
+            for (int x = 0; x < getStations().Length; x++)
+            {
+                for (int y = 0; y < getStations().Length; y++)
+                {
+                    Stations[y, x] = Stations[x, y];
+                }
+            }
+        }
 
 		public static int getTariefeenheden(String from, String to) 
 		{
-			switch (from) {
-			case "Utrecht Centraal":
-				switch (to) {
-				case "Utrecht Centraal":
-					return 0;
-				case "Gouda":
-					return 32;
-				case "Geldermalsen":
-					return 26;
-				case "Hilversum":
-					return 18;
-				case "Duivendrecht":
-					return 31;
-				case "Weesp":
-					return 33;
-				default:
-					throw new Exception ("Unknown stations");
-				}
-			case "Gouda":
-				switch (to) {
-				case "Gouda":
-					return 0;
-				case "Geldermalsen":
-					return 58;
-				case "Hilversum":
-					return 50;
-				case "Duivendrecht":
-					return 54;
-				case "Weesp":
-					return 57;
-				default:
-					return getTariefeenheden (to, from);
-				}
-			case "Geldermalsen":
-				switch (to) {
-				case "Geldermalsen":
-					return 0;
-				case "Hilversum":
-					return 44;
-				case "Duivendrecht":
-					return 57;
-				case "Weesp":
-					return 59;
-				default:
-					return getTariefeenheden (to, from);
-				}
-			case "Hilversum":
-				switch (to) {
-				case "Hilversum":
-					return 0;
-				case "Duivendrecht":
-					return 18;
-				case "Weesp":
-					return 15;
-				default:
-					return getTariefeenheden (to, from);
-				}
-			case "Duivendrecht":
-				switch (to) {
-				case "Duivendrecht":
-					return 0;
-				case "Weesp":
-					return 3;
-				default:
-					return getTariefeenheden (to, from);
-				}
-			case "Weesp":
-				switch (to) {
-				case "Weesp":
-					return 0;
-				default:
-					return getTariefeenheden (to, from);
-				}
-			default:
-				throw new Exception ("Unknown stations");
-			}
+            Tabel();
+            int beginstation = Array.IndexOf(getStations(), from);
+            int eindstation = Array.IndexOf(getStations(), to);
+
+            return Stations[eindstation, beginstation];
 		}
 	}
 }
