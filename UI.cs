@@ -24,6 +24,7 @@ namespace Lab3
 		}
 
         public UIInfo info;
+        public Price prijs;
 
         public int getTariefeenheden(UIInfo info)
         {
@@ -54,33 +55,13 @@ namespace Lab3
                     tableColumn += 2;
                     break;
             }
-
             return tableColumn;
-        }
-
-        public float getPrice(UIInfo info)
-        {
-            int tableColumn = getColumn(info);
-            int tariefeenheden = getTariefeenheden(info);
-            float price = PricingTable.getPrice(tariefeenheden, tableColumn);
-            if (info.Way == UIWay.Return)
-            {
-                price *= 2;
-            }
-            // Add 50 cent if paying with credit card
-            if (info.Payment == UIPayment.CreditCard)
-            {
-                price += 0.50f;
-            }
-
-            return price;
         }
 
         public void WayofPayment(UIInfo info)
         {
-            float price = getPrice(info);
+            float price = prijs.getPrice(info);
             Betaling x = new CreditCard();
-            
             switch (info.Payment)
             {
                 case UIPayment.DebitCard:

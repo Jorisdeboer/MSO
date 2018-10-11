@@ -15,7 +15,7 @@ namespace Lab3
 	// Mock CreditCard implementation
 	public class CreditCard : Betaling
 	{
-		protected override void Connect ()
+	protected override void Connect ()
 		{
 			MessageBox.Show ("Connecting to credit card reader");
 		}
@@ -61,7 +61,6 @@ namespace Lab3
 		{
 			MessageBox.Show ("Disconnecting from debit card reader");
 		}
-
 		protected override int BeginTransaction (float amount)
 		{
 			MessageBox.Show ("Begin transaction 1 of " + amount + " EUR");

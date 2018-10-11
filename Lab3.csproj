@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Betaling.cs" />
     <Compile Include="AdapterCoin.cs" />
+    <Compile Include="Price.cs" />
     <Compile Include="PrijsklasseBerekening.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
