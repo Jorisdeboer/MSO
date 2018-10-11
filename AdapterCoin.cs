@@ -13,19 +13,19 @@ namespace Lab3
         {
             coinMachine = new IKEAMyntAtare2000();
         }
-            
-        public override void Connect()
+
+	protected override void Connect()
         {
             coinMachine.starta();
         }
 
-        public override int BeginTransaction(float ammount)
+        protected override int BeginTransaction(float ammount)
         {
             coinMachine.betala(ammount);
             return 1;
         }
 
-        public override bool EndTransaction(int id)
+        protected override bool EndTransaction(int id)
         {
             coinMachine.stoppa();
             return true;

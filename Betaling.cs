@@ -7,10 +7,17 @@ namespace Lab3
 {
     public abstract class Betaling
     {
-        public abstract void Connect();
+        protected abstract void Connect();
 
-        public abstract int BeginTransaction(float amount);
+        protected abstract int BeginTransaction(float amount);
 
-        public abstract bool EndTransaction(int id);
+        protected abstract bool EndTransaction(int id);
+
+        public void HandlePayment(float ammount)
+        {
+            Connect();
+            int id = BeginTransaction(ammount);
+            EndTransaction(id);
+        }
     }
 }
