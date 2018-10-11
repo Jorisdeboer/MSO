@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Lab3
 {
-/*	public interface ICard
+	public interface ICard
 	{
 		void Connect();
 		void Disconnect();
@@ -11,12 +11,11 @@ namespace Lab3
 		bool EndTransaction(int id);
 		void CancelTransaction(int id);
 	}
-    */
 
 	// Mock CreditCard implementation
 	public class CreditCard : Betaling
 	{
-		public void Connect ()
+		protected override void Connect ()
 		{
 			MessageBox.Show ("Connecting to credit card reader");
 		}
@@ -26,13 +25,13 @@ namespace Lab3
 			MessageBox.Show ("Disconnecting from credit card reader");
 		}
 
-		public int BeginTransaction (float amount)
+		protected override int BeginTransaction (float amount)
 		{
 			MessageBox.Show ("Begin transaction 1 of " + amount + " EUR");
 			return 1;
 		}
 
-		public bool EndTransaction (int id)
+		protected override bool EndTransaction (int id)
 		{
 			if (id != 1)
 				return false;
@@ -53,7 +52,7 @@ namespace Lab3
 	// Mock CreditCard implementation
 	public class DebitCard : Betaling
 	{
-		public void Connect ()
+		protected override void Connect ()
 		{
 			MessageBox.Show ("Connecting to debit card reader");
 		}
@@ -63,13 +62,13 @@ namespace Lab3
 			MessageBox.Show ("Disconnecting from debit card reader");
 		}
 
-		public int BeginTransaction (float amount)
+		protected override int BeginTransaction (float amount)
 		{
 			MessageBox.Show ("Begin transaction 1 of " + amount + " EUR");
 			return 1;
 		}
 
-		public bool EndTransaction (int id)
+		protected override bool EndTransaction (int id)
 		{
 			if (id != 1)
 				return false;

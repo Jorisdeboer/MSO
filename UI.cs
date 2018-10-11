@@ -79,29 +79,37 @@ namespace Lab3
         public void WayofPayment(UIInfo info)
         {
             float price = getPrice(info);
-
+            Betaling x = new CreditCard();
+            
             switch (info.Payment)
             {
-                case UIPayment.CreditCard:
-                    CreditCard c = new CreditCard();
-                    c.Connect();
-                    int ccid = c.BeginTransaction(price);
-                    c.EndTransaction(ccid);
-                    break;
                 case UIPayment.DebitCard:
-                    DebitCard d = new DebitCard();
-                    d.Connect();
-                    int dcid = d.BeginTransaction(price);
-                    d.EndTransaction(dcid);
+                    x = new DebitCard();
                     break;
                 case UIPayment.Cash:
-                    IKEAMyntAtare2000 coin = new IKEAMyntAtare2000();
-                    coin.starta();
-                    coin.betala((int)Math.Round(price * 100));
-                    coin.stoppa();
+                    x = new AdapterCoin();
                     break;
             }
+
+            x.HandlePayment(price);
         }
+        
+        public bool StampOrNot(UIInfo info)
+        {
+            if (info.Way == UIWay.Return)
+                return true;
+
+            switch (info.Stamp)
+            {
+                case UIStamp.YesStamp:
+                    return true;
+                case UIStamp.NoStamp:
+                    return false;
+            }
+
+            return false;
+        }
+
 #region Set-up -- don't look at it
 		private void initializeControls()
 		{
@@ -227,11 +235,38 @@ namespace Lab3
 			pay.Dock = DockStyle.Fill;
 			grid.Controls.Add (pay, 0, 3);
 			grid.SetColumnSpan (pay, 6);
-			// Set up event
-			pay.Click += (object sender, EventArgs e) => WayofPayment(getUIInfo());
+            // Set up event
+            pay.Click += PayClick;
 		}
+        #endregion
+        public UIStamp StampBox()
+        {
+            UIStamp stamp;
 
-		private UIInfo getUIInfo()
+            if (returnWay.Checked)
+                return stamp = UIStamp.NoStamp;
+
+            string message = "Stamp";
+            string info = "Would you like the date stamped on your ticket?";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;           
+
+            result = MessageBox.Show(info, message, buttons);
+
+            if (result == DialogResult.Yes)
+                stamp = UIStamp.YesStamp;
+
+            else stamp = UIStamp.NoStamp;
+
+            return stamp;
+        }
+
+        public void PayClick(object sender, EventArgs e)
+        {
+            WayofPayment(getUIInfo());
+        }     
+
+        private UIInfo getUIInfo()
 		{
 			UIClass cls;
 			if (firstClass.Checked)
@@ -266,11 +301,16 @@ namespace Lab3
 				break;
 			}
 
+            UIStamp stmp;
+            if (StampBox() == UIStamp.YesStamp)
+                stmp = UIStamp.YesStamp;
+            else stmp = UIStamp.NoStamp;               
+
 			return new UIInfo ((string)fromBox.SelectedItem,
 				(string)toBox.SelectedItem,
-				cls, way, dis, pment);
+				cls, way, dis, pment, stmp);
 		}
-#endregion
+
 	}
 }
 

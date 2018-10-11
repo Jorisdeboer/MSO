@@ -28,6 +28,12 @@ namespace Lab3
 		Cash
 	}
 
+    public enum UIStamp
+    {
+        YesStamp,
+        NoStamp
+    }
+
 	public struct UIInfo
 	{
 		string from, to;
@@ -35,8 +41,9 @@ namespace Lab3
 		UIWay way;
 		UIDiscount discount;
 		UIPayment payment;
+        UIStamp stamp;
 
-		public UIInfo (string from, string to, UIClass cls, UIWay way, UIDiscount discount, UIPayment payment)
+		public UIInfo (string from, string to, UIClass cls, UIWay way, UIDiscount discount, UIPayment payment, UIStamp stamp)
 		{
 			this.from = from;
 			this.to = to;
@@ -44,6 +51,7 @@ namespace Lab3
 			this.way = way;
 			this.discount = discount;
 			this.payment = payment;
+            this.stamp = stamp;
 		}
 
 		public string From {
@@ -81,6 +89,14 @@ namespace Lab3
 				return payment;
 			}
 		}
-	}
+
+        public UIStamp Stamp {
+            get
+            {
+                return stamp;
+            }
+        }
+    }
+
 }
 
