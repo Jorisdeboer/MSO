@@ -19,9 +19,9 @@ namespace Lab3
             coinMachine.starta();
         }
 
-        protected override int BeginTransaction(float ammount)
+        protected override int BeginTransaction(float amount)
         {
-            coinMachine.betala(ammount);
+            coinMachine.betala(amount);
             return 1;
         }
 
