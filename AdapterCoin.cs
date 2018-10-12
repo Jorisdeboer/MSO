@@ -14,7 +14,7 @@ namespace Lab3
             coinMachine = new IKEAMyntAtare2000();
         }
 
-        protected override void Connect()
+	protected override void Connect()
         {
             coinMachine.starta();
         }
