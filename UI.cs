@@ -18,44 +18,19 @@ namespace Lab3
 		ComboBox payment;
 		Button pay;
 
-		public UI ()
+		public UI()
 		{
-			initializeControls ();
-		}
+			initializeControls();
+            Tariefeenheden.Tabel();
+        }
 
         public UIInfo info;
-        public Price prijs;
+        public Price prijs = new Price();
 
         public int getTariefeenheden(UIInfo info)
         {
             int tariefeenheden = Tariefeenheden.getTariefeenheden(info.From, info.To);
             return tariefeenheden;
-        }
-
-        public int getColumn(UIInfo info)
-        {
-            int tableColumn;
-            // First based on class
-            switch (info.Class)
-            {
-                case UIClass.FirstClass:
-                    tableColumn = 3;
-                    break;
-                default:
-                    tableColumn = 0;
-                    break;
-            }
-            //compute the column in the table based on choices
-            switch (info.Discount)
-            {
-                case UIDiscount.TwentyDiscount:
-                    tableColumn += 1;
-                    break;
-                case UIDiscount.FortyDiscount:
-                    tableColumn += 2;
-                    break;
-            }
-            return tableColumn;
         }
 
         public void WayofPayment(UIInfo info)

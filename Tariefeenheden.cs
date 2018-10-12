@@ -52,7 +52,6 @@ namespace Lab3
 
 		public static int getTariefeenheden(String from, String to) 
 		{
-            Tabel();
             int beginstation = Array.IndexOf(getStations(), from);
             int eindstation = Array.IndexOf(getStations(), to);
 

@@ -7,17 +7,17 @@ namespace Lab3
 	{
 		public void starta()
 		{
-			MessageBox.Show ("Välkommen till IKEA Mynt Ätare 2000");
+			MessageBox.Show ("Thanks for choosing the Cash option.");
 		}
 
 		public void stoppa()
 		{
-			MessageBox.Show ("Hejdå!");
+			MessageBox.Show ("Ending this transaction.");
 		}
 
 		public void betala(float pris)
 		{
-			MessageBox.Show (pris + " cent");
+			MessageBox.Show ("Please pay: €" + pris + ",-");
 		}
 	}
 }
