@@ -59,10 +59,11 @@ namespace Lab3
             {
                 case UIStamp.YesStamp:
                     return true;
+                    //print de datum hier bij
                 case UIStamp.NoStamp:
                     return false;
+                    //print hier geen datum bij
             }
-
             return false;
         }
 

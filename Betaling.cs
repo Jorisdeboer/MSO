@@ -13,10 +13,10 @@ namespace Lab3
 
         protected abstract bool EndTransaction(int id);
 
-        public void HandlePayment(float ammount)
+        public void HandlePayment(float amount)
         {
             Connect();
-            int id = BeginTransaction(ammount);
+            int id = BeginTransaction(amount);
             EndTransaction(id);
         }
     }
